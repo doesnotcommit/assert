@@ -29,16 +29,16 @@ func NotEqual(t *testing.T, donotwant interface{}, got interface{}, msg string) 
 	if donotwantErr, ok := donotwant.(error); ok {
 		gotErr, ok := got.(error)
 		if !ok {
-			t.Errorf("%s: do not want error %v, got non-error %v", msg, donotwantErr, got)
+			t.Errorf("%s: do not want error %+v, got non-error %+v", msg, donotwantErr, got)
 			return
 		}
 		if errors.Is(gotErr, donotwantErr) {
-			t.Errorf("%s: do not want error %v, got error %v", msg, donotwantErr, gotErr)
+			t.Errorf("%s: do not want error %+v, got error %+v", msg, donotwantErr, gotErr)
 			return
 		}
 		return
 	}
 	if donotwant == got {
-		t.Errorf("%s: do not want %v, got %v", msg, donotwant, got)
+		t.Errorf("%s: do not want %+v, got %+v", msg, donotwant, got)
 	}
 }
