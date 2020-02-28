@@ -2,6 +2,7 @@ package assert
 
 import (
 	"errors"
+	"reflect"
 	"testing"
 )
 
@@ -19,7 +20,7 @@ func Equal(t *testing.T, want interface{}, got interface{}, msg string) {
 		}
 		return
 	}
-	if want != got {
+	if !reflect.DeepEqual(want, got) {
 		t.Errorf("%s: want %+v, got %+v", msg, want, got)
 	}
 }
@@ -38,7 +39,7 @@ func NotEqual(t *testing.T, donotwant interface{}, got interface{}, msg string) 
 		}
 		return
 	}
-	if donotwant == got {
+	if reflect.DeepEqual(donotwant, got) {
 		t.Errorf("%s: do not want %+v, got %+v", msg, donotwant, got)
 	}
 }
